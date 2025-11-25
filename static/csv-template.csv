@@ -1,0 +1,4 @@
+domain,source,notes,vendor_type
+example.com,Manual entry,Test domain,synthetic_identity
+example2.com,CSV Upload,Another test domain,deepfake
+

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: personaforge-postgres
+    environment:
+      POSTGRES_USER: personaforge_user
+      POSTGRES_PASSWORD: personaforge123password
+      POSTGRES_DB: personaforge
+    ports:
+      - "5433:5432"  # Using 5433 to avoid conflict with other PostgreSQL containers
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U personaforge_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+

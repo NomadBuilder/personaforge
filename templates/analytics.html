@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Analytics – PersonaForge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="/" class="nav__brand">
+        <span class="nav__brand-mark"></span>
+        PERSONAFORGE
+      </a>
+      <div class="nav__links">
+        <a href="/" class="nav__link">Home</a>
+        <a href="/dashboard" class="nav__link">Dashboard</a>
+        <a href="/vendors" class="nav__link">Vendors</a>
+        <a href="/methodology" class="nav__link">Methodology</a>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="content-container">
+      <header class="page-header">
+        <h1>Analytics & Statistics</h1>
+        <p class="subtitle">Comprehensive insights into synthetic identity vendor infrastructure</p>
+      </header>
+
+      <!-- Summary Stats -->
+      <div class="stats-grid" id="summary-stats">
+        <div class="stat-card">
+          <div class="stat-value" id="total-domains">0</div>
+          <div class="stat-label">Total Domains</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="total-vendors">0</div>
+          <div class="stat-label">Vendors Detected</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="domains-enriched">0</div>
+          <div class="stat-label">Domains Enriched</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="domains-typed">0</div>
+          <div class="stat-label">With Vendor Type</div>
+        </div>
+      </div>
+
+      <!-- Vendor Types Distribution -->
+      <section class="analytics-section">
+        <h2>Vendor Type Distribution</h2>
+        <div class="chart-container" id="vendor-types-chart">
+          <div class="loading">Loading...</div>
+        </div>
+      </section>
+
+      <!-- Top Infrastructure -->
+      <div class="analytics-grid">
+        <section class="analytics-section">
+          <h2>Top Hosting Providers</h2>
+          <div class="list-container" id="top-hosts">
+            <div class="loading">Loading...</div>
+          </div>
+        </section>
+
+        <section class="analytics-section">
+          <h2>Top CDNs</h2>
+          <div class="list-container" id="top-cdns">
+            <div class="loading">Loading...</div>
+          </div>
+        </section>
+
+        <section class="analytics-section">
+          <h2>Top Registrars</h2>
+          <div class="list-container" id="top-registrars">
+            <div class="loading">Loading...</div>
+          </div>
+        </section>
+
+        <section class="analytics-section">
+          <h2>Top Payment Processors</h2>
+          <div class="list-container" id="top-payment">
+            <div class="loading">Loading...</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Top Vendors -->
+      <section class="analytics-section">
+        <h2>Top Vendors by Domain Count</h2>
+        <div class="vendors-container" id="top-vendors">
+          <div class="loading">Loading...</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+</body>
+</html>
+

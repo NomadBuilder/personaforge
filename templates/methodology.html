@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sources & Methodology – PersonaForge</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="/" class="nav__brand">
+        <span class="nav__brand-mark"></span>
+        PERSONAFORGE
+      </a>
+      <div class="nav__links">
+        <a href="/" class="nav__link">Home</a>
+        <a href="/dashboard" class="nav__link">Dashboard</a>
+        <a href="/vendors" class="nav__link">Vendors</a>
+        <a href="/methodology" class="nav__link nav__link--accent">Methodology</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content-container">
+      <!-- Header Section -->
+      <section class="section">
+        <div class="section__header">
+          <span class="section__dot"></span>
+          <span class="section__title">Sources & Methodology</span>
+        </div>
+        
+        <h1 class="section__headline">How PersonaForge Collects Intelligence</h1>
+        <p class="section__description">
+          PersonaForge uses safe, legal, and publicly-available OSINT (Open Source Intelligence) sources to track synthetic identity vendors and deepfake services. We collect metadata only—never illegal content.
+        </p>
+      </section>
+
+      <!-- Sources We Monitor -->
+      <section class="section">
+        <div class="section__header">
+          <span class="section__dot"></span>
+          <span class="section__title">Sources We Monitor</span>
+        </div>
+        <h2 class="section__headline">Public Intelligence Sources</h2>
+        <p class="section__description">We monitor multiple public sources to discover and track synthetic identity vendors.</p>
+        
+        <div class="info-box-grid" style="margin-top: 3rem;">
+          <div class="info-box">
+            <h3 class="info-box__title">1. Public Telegram Channels</h3>
+            <p class="info-box__text">
+              Many persona kit vendors operate via public Telegram channels. We collect metadata only:
+            </p>
+            <ul style="margin-left: 1.5rem; color: #ccc; margin-top: 1rem; line-height: 1.8;">
+              <li>Channel names and descriptions</li>
+              <li>Public links and contact information</li>
+              <li>Service descriptions and pricing (text only)</li>
+              <li>Admin handles and forwarding patterns</li>
+            </ul>
+            <p class="info-box__text" style="margin-top: 1.5rem; font-size: 0.9rem; color: #999; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+              <strong style="color: #4ade80;">✅ 100% Legal:</strong> We never access private groups or download illegal media. Only public channel metadata.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 class="info-box__title">2. Open Social Networks</h3>
+            <p class="info-box__text">
+              Reddit, YouTube, and other platforms host public discussions about fraud tools and deepfake services.
+            </p>
+            <ul style="margin-left: 1.5rem; color: #ccc; margin-top: 1rem; line-height: 1.8;">
+              <li><strong>Reddit:</strong> Public subreddits discussing scams, OSINT, and fraud-as-a-service</li>
+              <li><strong>YouTube:</strong> Channels marketing deepfake tools, AI voice clones, and persona generators</li>
+              <li><strong>Public Forums:</strong> Discussions about synthetic identity and impersonation tools</li>
+            </ul>
+            <p class="info-box__text" style="margin-top: 1.5rem; font-size: 0.9rem; color: #999; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+              We analyze public discussions and metadata—never private content or illegal material.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 class="info-box__title">3. Clearnet Marketplaces</h3>
+            <p class="info-box__text">
+              Legal marketplaces like Fiverr, Upwork, and Etsy host services for persona kits and deepfake tools.
+            </p>
+            <ul style="margin-left: 1.5rem; color: #ccc; margin-top: 1rem; line-height: 1.8;">
+              <li>Service listings and descriptions</li>
+              <li>Seller metadata and pricing</li>
+              <li>Categories and keywords</li>
+              <li>Outbound links to vendor websites</li>
+            </ul>
+            <p class="info-box__text" style="margin-top: 1.5rem; font-size: 0.9rem; color: #999; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+              <strong style="color: #4ade80;">✅ 100% Legal:</strong> These are public listings on legal platforms. We only collect publicly-visible metadata.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 class="info-box__title">4. Hosting & Domain Records</h3>
+            <p class="info-box__text">
+              Public domain and hosting intelligence reveals infrastructure patterns.
+            </p>
+            <ul style="margin-left: 1.5rem; color: #ccc; margin-top: 1rem; line-height: 1.8;">
+              <li><strong>Certificate Transparency:</strong> SSL certificates reveal domains and subdomains</li>
+              <li><strong>WHOIS Data:</strong> Domain registration information</li>
+              <li><strong>DNS Records:</strong> Hosting providers, CDNs, and IP addresses</li>
+              <li><strong>Threat Intelligence:</strong> Malware databases and abuse reports</li>
+            </ul>
+            <p class="info-box__text" style="margin-top: 1.5rem; font-size: 0.9rem; color: #999; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+              All domain and hosting data is publicly available through legal APIs and databases.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 class="info-box__title">5. Publicly-Indexed Scam Reports</h3>
+            <p class="info-box__text">
+              Open databases of fraud and abuse reports help identify suspect domains.
+            </p>
+            <ul style="margin-left: 1.5rem; color: #ccc; margin-top: 1rem; line-height: 1.8;">
+              <li>ScamAdviser and fraud databases</li>
+              <li>AbuseIPDB and SpamHaus</li>
+              <li>PhishStats and CheckPhish</li>
+              <li>HaveIBeenPwned leak summaries</li>
+            </ul>
+          </div>
+
+          <div class="info-box" style="border-left-color: #ffaa00;">
+            <h3 class="info-box__title">6. Open Dark Web Marketplaces (Optional)</h3>
+            <p class="info-box__text">
+              <strong>Metadata Only:</strong> If enabled, we access dark web marketplaces via Tor to collect:
+            </p>
+            <ul style="margin-left: 1.5rem; color: #ccc; margin-top: 1rem; line-height: 1.8;">
+              <li>Forum discussions and service menus</li>
+              <li>Vendor profiles and pricing (text only)</li>
+              <li>Contact handles and domain patterns</li>
+              <li>Payment wallet addresses</li>
+            </ul>
+            <p class="info-box__text" style="margin-top: 1.5rem; font-size: 0.9rem; color: #ffaa00; padding-top: 1rem; border-top: 1px solid rgba(255,170,0,0.2);">
+              <strong>⚠️ Important:</strong> We never download files, media, or executables. Only text metadata. Dark web access is disabled by default and requires explicit configuration.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- What We Analyze -->
+      <section class="section">
+        <div class="section__header">
+          <span class="section__dot"></span>
+          <span class="section__title">What We Analyze</span>
+        </div>
+        <h2 class="section__headline">Intelligence Categories</h2>
+        <p class="section__description">We focus on four key areas of synthetic identity fraud infrastructure.</p>
+        
+        <div class="info-box-grid info-box-grid--4cols" style="margin-top: 3rem;">
+          <div class="info-box">
+            <h3 class="info-box__title">Synthetic Identity Kit Vendors</h3>
+            <p class="info-box__text">
+              Sellers offering AI-generated personas, fake documents, and identity packs used for fraud.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 class="info-box__title">Deepfake Impersonation Tools</h3>
+            <p class="info-box__text">
+              Services providing video, voice, and photo impersonation capabilities for scams and extortion.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 class="info-box__title">Fraud Ecosystem Infrastructure</h3>
+            <p class="info-box__text">
+              Hosting providers, CDNs, payment processors, and domains reused across multiple vendors.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3 class="info-box__title">Distribution Channels</h3>
+            <p class="info-box__text">
+              Telegram channels, forums, marketplaces, and social media platforms where vendors operate.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why It's Safe -->
+      <section class="section">
+        <div class="section__header">
+          <span class="section__dot"></span>
+          <span class="section__title">Why It's Safe & Legal</span>
+        </div>
+        <h2 class="section__headline">Legal & Ethical Framework</h2>
+        <p class="section__description">PersonaForge follows strict legal and ethical guidelines for intelligence collection.</p>
+        
+        <div class="info-box-grid info-box-grid--4cols" style="margin-top: 3rem;">
+          <div class="info-box" style="border-left-color: #4ade80;">
+            <h3 class="info-box__title">✅ Metadata Only</h3>
+            <p class="info-box__text">
+              We collect text, links, timestamps, and descriptions—never illegal content, media files, or executables.
+            </p>
+          </div>
+
+          <div class="info-box" style="border-left-color: #4ade80;">
+            <h3 class="info-box__title">✅ Public Sources Only</h3>
+            <p class="info-box__text">
+              All data comes from publicly-accessible sources. We never access private groups, encrypted content, or restricted areas.
+            </p>
+          </div>
+
+          <div class="info-box" style="border-left-color: #4ade80;">
+            <h3 class="info-box__title">✅ OSINT Best Practices</h3>
+            <p class="info-box__text">
+              We follow open source intelligence (OSINT) methodologies used by researchers, journalists, and security professionals worldwide.
+            </p>
+          </div>
+
+          <div class="info-box" style="border-left-color: #4ade80;">
+            <h3 class="info-box__title">✅ Protects Victims</h3>
+            <p class="info-box__text">
+              By mapping the infrastructure behind synthetic identity fraud, we help platforms and law enforcement identify and disrupt these operations—protecting potential victims.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transparency -->
+      <section class="section" style="max-width: 100%; padding: 4rem 0; margin: 0;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+          <div class="section__header">
+            <span class="section__dot"></span>
+            <span class="section__title">Transparency</span>
+          </div>
+          <h2 class="section__headline">Open Methodology</h2>
+          <p class="section__description">PersonaForge is designed for researchers, journalists, platform trust & safety teams, and law enforcement.</p>
+        </div>
+        
+        <div class="info-box" style="margin-top: 3rem; max-width: 100%; border-radius: 0; border-left: none; border-right: none; background: var(--bg-alt);">
+          <div style="max-width: 1400px; margin: 0 auto; padding: 2rem;">
+            <p class="info-box__text" style="font-size: 1.1rem; line-height: 1.8;">
+              All data collection methods are documented, legal, and transparent. We believe in open methodology and ethical intelligence gathering.
+            </p>
+            <p class="info-box__text" style="margin-top: 1.5rem; color: var(--text-muted);">
+              If you have questions about our methodology or want to report a concern, please <a href="mailto:aazirmun@gmail.com" style="color: var(--accent); text-decoration: underline; transition: opacity 0.2s;">contact us</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Back to Home -->
+      <div style="text-align: center; margin-top: 4rem; margin-bottom: 4rem;">
+        <a href="/" class="btn btn-primary">Back to Home</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

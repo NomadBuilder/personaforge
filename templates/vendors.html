@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vendors – PersonaForge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="/" class="nav__brand">
+        <span class="nav__brand-mark"></span>
+        PERSONAFORGE
+      </a>
+      <div class="nav__links">
+        <a href="/" class="nav__link">Home</a>
+        <a href="/dashboard" class="nav__link">Dashboard</a>
+        <a href="/vendors" class="nav__link nav__link--accent">Vendors</a>
+        <a href="/methodology" class="nav__link">Methodology</a>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="content-container">
+      <header class="page-header">
+        <h1>Vendor Intelligence</h1>
+        <p class="subtitle">Discover and analyze synthetic identity vendors through infrastructure clustering</p>
+      </header>
+
+      <!-- Explanation Section -->
+      <div style="background: rgba(255, 68, 68, 0.1); border-left: 3px solid #ff4444; padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px;">
+        <h3 style="margin-bottom: 0.75rem; color: #ff4444; font-size: 1.1rem;">What This Page Shows</h3>
+        <p style="color: #ccc; line-height: 1.6; margin-bottom: 1rem;">
+          This page displays <strong>infrastructure clusters</strong> — groups of domains that share hosting, CDN, payment processors, or registrars. 
+          These clusters help identify potential vendor networks and related operations.
+        </p>
+        <p style="color: #999; font-size: 0.9rem; margin: 0;">
+          <strong>How it works:</strong> PersonaForge automatically discovers domains from public sources and groups them by shared infrastructure. 
+          Clusters with 2+ domains sharing infrastructure are shown below. Click on a cluster to see which domains are connected.
+        </p>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-bar" style="margin-bottom: 2rem;">
+        <div class="filter-group">
+          <label style="color: #999; font-size: 0.9rem;">Min Domains per Cluster:</label>
+          <input type="number" id="min-domains" value="2" min="1" class="filter-input" style="width: 80px;">
+          <span style="color: #666; font-size: 0.85rem; margin-left: 0.5rem;">(Filter clusters by size)</span>
+        </div>
+        <button id="refresh-vendors" class="btn btn-primary">Refresh Data</button>
+        <a href="/api/export/vendors?format=csv" class="btn btn-secondary" style="text-decoration: none;">Export Clusters (CSV)</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" id="vendor-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div class="stat-card">
+          <div class="stat-value" id="total-domains">0</div>
+          <div class="stat-label">Domains Tracked</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="total-vendors">0</div>
+          <div class="stat-label">Vendor Types</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="total-high-risk">0</div>
+          <div class="stat-label">High-Risk Domains</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="total-clusters">0</div>
+          <div class="stat-label">Shared Infrastructure Groups</div>
+        </div>
+      </div>
+
+      <!-- Clusters Section -->
+      <section class="clusters-section" style="margin-top: 3rem;">
+        <h2 style="margin-bottom: 1rem;">Infrastructure Clusters</h2>
+        <p style="color: #999; margin-bottom: 1.5rem; font-size: 0.9rem;">
+          Domains grouped by shared infrastructure (hosting, CDN, payment processors, registrars). 
+          Clusters help identify related operations and vendor networks.
+        </p>
+        <div class="clusters-container" id="clusters-container">
+          <div class="loading">Loading clusters...</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/vendors.js') }}"></script>
+</body>
+</html>
+

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PersonaForge – Synthetic Identity Intelligence</title>
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+    
+    /* Navigation - using external CSS, keeping only page-specific overrides */
+    
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    .nav__links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav__link {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    
+    .nav__link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav__link--active {
+      background: #ff4444;
+    }
+    
+    /* Hero Section */
+    .hero {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 4rem;
+      background: url('https://i.imgur.com/lIq8UU2.jpeg') center/cover no-repeat;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero__headline {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+    }
+    
+    .hero__subtext {
+      font-size: 1.25rem;
+      color: #ccc;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+    
+    .hero__cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    
+    .btn--primary {
+      background: #ff4444;
+      color: #fff;
+    }
+    
+    .btn--primary:hover {
+      background: #ff3333;
+    }
+    
+    .btn--secondary {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn--secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Section Styles */
+    .section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 4rem;
+    }
+    
+    .section__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .section__dot {
+      width: 8px;
+      height: 8px;
+      background: #ff4444;
+      border-radius: 50%;
+    }
+    
+    .section__title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #ff4444;
+    }
+    
+    .section__headline {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+    
+    .section__description {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 700px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+    
+    /* Domain Check Section */
+    .domain-check {
+      background: rgba(255, 68, 68, 0.05);
+      border: 1px solid rgba(255, 68, 68, 0.2);
+      padding: 2rem;
+      border-radius: 8px;
+      margin-top: 3rem;
+    }
+    
+    .domain-check__form {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .domain-check__input {
+      flex: 1;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1rem;
+    }
+    
+    .domain-check__input::placeholder {
+      color: #666;
+    }
+    
+    .domain-check__input:focus {
+      outline: none;
+      border-color: #ff4444;
+    }
+    
+    .domain-check__result {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      display: none;
+    }
+    
+    .domain-check__result.show {
+      display: block;
+    }
+    
+    .domain-check__result h4 {
+      color: #ff4444;
+      margin-bottom: 1rem;
+    }
+    
+    .domain-check__result p {
+      margin: 0.5rem 0;
+      color: #ccc;
+    }
+    
+    .domain-check__result a {
+      color: #ff4444;
+      text-decoration: none;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+    
+    .domain-check__result a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Info Box */
+    .info-box {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid #ff4444;
+      padding: 2rem;
+      margin-top: 3rem;
+      max-width: 800px;
+    }
+    
+    .info-box__title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .info-box__text {
+      color: #ccc;
+      line-height: 1.7;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 4rem;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 6rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1.5rem 2rem;
+      }
+      
+      
+      .hero {
+        padding: 4rem 2rem;
+      }
+      
+      .hero__headline {
+        font-size: 2.5rem;
+      }
+      
+      .section {
+        padding: 4rem 2rem;
+      }
+      
+      .section__headline {
+        font-size: 2rem;
+      }
+      
+      .domain-check__form {
+        flex-direction: column;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav__brand">
+      <span class="nav__brand-mark"></span>
+      PERSONAFORGE
+    </a>
+    <div class="nav__links">
+      <a href="/" class="nav__link nav__link--accent">Home</a>
+      <a href="/dashboard" class="nav__link">Dashboard</a>
+      <a href="/vendors" class="nav__link">Vendors</a>
+      <a href="/methodology" class="nav__link">Methodology</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="hero__headline">Exposing the hidden supply chain behind AI-generated identities</h1>
+    <p class="hero__subtext">PersonaForge tracks the vendors, infrastructure, and distribution networks powering synthetic identity fraud, deepfake impersonations, and AI-constructed persona kits used in scams and extortion.</p>
+    <div class="hero__cta">
+      <a href="/dashboard" class="btn btn--primary">SEE THE DATA</a>
+      <a href="/vendors" class="btn btn--secondary">EXPLORE VENDORS</a>
+    </div>
+  </section>
+
+    <!-- Current Findings -->
+    <section class="section" id="findings">
+      <div class="section__header">
+        <span class="section__dot"></span>
+        <span class="section__title">Current findings</span>
+      </div>
+      <h2 class="section__headline">Active tracking of synthetic identity vendors</h2>
+      <p class="section__description">PersonaForge continuously discovers and tracks vendors from public sources using AI and automated discovery. We monitor Telegram channels, YouTube, clearnet marketplaces, domain intelligence, and threat databases. <a href="/methodology" style="color: #ff4444; text-decoration: underline;">Learn about our sources & methodology →</a></p>
+      
+      <div id="stats-display" style="margin-top: 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+          <div class="info-box" style="margin-top: 0;">
+            <h3 class="info-box__title" style="font-size: 2rem; margin-bottom: 0.5rem;" id="stat-domains">-</h3>
+            <p class="info-box__text" style="margin: 0;">Domains Tracked</p>
+          </div>
+          <div class="info-box" style="margin-top: 0;">
+            <h3 class="info-box__title" style="font-size: 2rem; margin-bottom: 0.5rem;" id="stat-vendors">-</h3>
+            <p class="info-box__text" style="margin: 0;">Vendor Types</p>
+          </div>
+          <div class="info-box" style="margin-top: 0;">
+            <h3 class="info-box__title" style="font-size: 2rem; margin-bottom: 0.5rem;" id="stat-high-risk">-</h3>
+            <p class="info-box__text" style="margin: 0;">High-Risk Domains</p>
+          </div>
+          <div class="info-box" style="margin-top: 0;">
+            <h3 class="info-box__title" style="font-size: 2rem; margin-bottom: 0.5rem;" id="stat-clusters">-</h3>
+            <p class="info-box__text" style="margin: 0;">Shared Infrastructure Groups</p>
+          </div>
+        </div>
+        
+        <div id="top-vendors-display" style="margin-top: 2rem;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Top Tracked Vendors</h3>
+          <div id="vendors-list" style="color: #999;">Loading...</div>
+        </div>
+        
+        <div id="recent-discoveries" style="margin-top: 2rem;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Recent Discoveries</h3>
+          <div id="discoveries-list" style="color: #999;">Loading...</div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Why It Matters -->
+  <section class="section">
+    <div class="section__header">
+      <span class="section__dot"></span>
+      <span class="section__title">Why this matters</span>
+    </div>
+    <h2 class="section__headline">Synthetic identity fraud is a growing threat, not just a passing concern.</h2>
+    <p class="section__description">AI-generated personas and deepfake impersonation kits are fueling a surge in fraud, extortion, and platform manipulation. These statistics highlight the scale of the threat.</p>
+    
+    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem;">
+      <div class="info-box" style="margin-top: 0;">
+        <h3 class="info-box__title">$20B+ in Synthetic ID Fraud</h3>
+        <p class="info-box__text">Synthetic identity fraud is the fastest-growing financial crime in North America. Most persona-for-sale kits now include AI-generated faces, voices, or documents.</p>
+        <p class="info-box__text" style="margin-top: 1rem; font-size: 0.9rem; color: #999;"><em>Sources: U.S. Federal Reserve, Recorded Future</em></p>
+      </div>
+      
+      <div class="info-box" style="margin-top: 0;">
+        <h3 class="info-box__title">500k+ Deepfake Scams Annually</h3>
+        <p class="info-box__text">Deepfake impersonation scam reports have surged over 400% since 2022. These kits enable fake job applicants, deepfake interviews, credit scams, and recruitment fraud.</p>
+        <p class="info-box__text" style="margin-top: 1rem; font-size: 0.9rem; color: #999;"><em>Sources: Europol, FTC</em></p>
+      </div>
+      
+      <div class="info-box" style="margin-top: 0;">
+        <h3 class="info-box__title">80% of Platforms Vulnerable</h3>
+        <p class="info-box__text">Most online platforms lack adequate verification to detect synthetic identities. AI-generated personas can bypass traditional KYC checks, creating accounts at scale for fraud and manipulation.</p>
+        <p class="info-box__text" style="margin-top: 1rem; font-size: 0.9rem; color: #999;"><em>Sources: Javelin Strategy, Identity Theft Resource Center</em></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 PersonaForge — Mapping the future of synthetic identity threats
+  </footer>
+
+  <script>
+    // Load homepage statistics on page load
+    async function loadHomepageStats() {
+      try {
+        console.log('Loading homepage stats...');
+        const response = await fetch('/api/homepage-stats');
+        const data = await response.json();
+        console.log('Stats loaded:', data);
+        
+        // If no data, trigger discovery
+        if (data.total_domains === 0) {
+          // Trigger discovery in background
+          fetch('/api/discover', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ limit_per_source: 15, auto_enrich: true })
+          }).catch(err => console.log('Discovery triggered in background'));
+          
+          // Show message that discovery is running
+          document.getElementById('vendors-list').innerHTML = '<p style="color: #999;">Running initial discovery... This may take a minute.</p>';
+          document.getElementById('discoveries-list').innerHTML = '<p style="color: #999;">Discovery in progress...</p>';
+          
+          // Retry loading stats after a delay
+          setTimeout(loadHomepageStats, 10000);
+          return;
+        }
+        
+        // Update statistics
+        document.getElementById('stat-domains').textContent = data.total_domains || 0;
+        // Use top_vendors count if vendors table is empty
+        let vendorCount = data.total_vendors || 0;
+        if (vendorCount === 0 && data.top_vendors && data.top_vendors.length > 0) {
+          vendorCount = data.top_vendors.length;
+        }
+        document.getElementById('stat-vendors').textContent = vendorCount;
+        document.getElementById('stat-high-risk').textContent = data.high_risk_domains || 0;
+        document.getElementById('stat-clusters').textContent = data.infrastructure_clusters || 0;
+        
+        // Display top vendors
+        const vendorsList = document.getElementById('vendors-list');
+        console.log('Top vendors:', data.top_vendors);
+        if (data.top_vendors && data.top_vendors.length > 0) {
+          let html = '<ul style="list-style: none; padding: 0; margin: 0;">';
+          data.top_vendors.slice(0, 5).forEach(v => {
+            const riskColor = (v.avg_risk_score || 0) >= 70 ? '#ff4444' : (v.avg_risk_score || 0) >= 40 ? '#ff8844' : '#999';
+            html += `<li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+              <strong style="color: #ff4444;">${v.vendor_name || 'Unknown'}</strong> 
+              <span style="color: #999; margin-left: 1rem;">${v.domain_count} domains</span>
+              <span style="color: #999; margin-left: 1rem;">${v.vendor_type || 'unknown'}</span>
+              <span style="color: ${riskColor}; margin-left: 1rem; font-weight: 600;">Risk: ${v.avg_risk_score || 0}/100</span>
+            </li>`;
+          });
+          html += '</ul>';
+          vendorsList.innerHTML = html;
+          console.log('Vendors list updated');
+        } else {
+          if (!data.database_available) {
+            vendorsList.innerHTML = '<p style="color: #ff4444;">⚠️ PostgreSQL database not connected. Start with: <code style="background: rgba(255,68,68,0.1); padding: 0.25rem 0.5rem; border-radius: 4px;">docker-compose up -d</code></p>';
+          } else {
+            vendorsList.innerHTML = '<p style="color: #666;">No vendors tracked yet. Discovery runs automatically on startup.</p>';
+          }
+        }
+        
+        // Display recent discoveries
+        const discoveriesList = document.getElementById('discoveries-list');
+        console.log('Recent discoveries:', data.recent_discoveries);
+        if (data.recent_discoveries && data.recent_discoveries.length > 0) {
+          let html = '<ul style="list-style: none; padding: 0; margin: 0;">';
+          data.recent_discoveries.slice(0, 5).forEach(d => {
+            const domain = d.domain || 'Unknown';
+            const vtype = d.vendor_type || 'unknown';
+            const risk = d.risk_score || 0;
+            const riskColor = risk >= 70 ? '#ff4444' : risk >= 40 ? '#ff8844' : '#999';
+            html += `<li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+              <strong style="color: #fff;">${domain}</strong> 
+              <span style="color: #999; margin-left: 1rem;">${vtype}</span>
+              <span style="color: ${riskColor}; margin-left: 1rem; font-weight: 600;">Risk: ${risk}/100</span>
+            </li>`;
+          });
+          html += '</ul>';
+          discoveriesList.innerHTML = html;
+          console.log('Discoveries list updated');
+        } else {
+          if (!data.database_available) {
+            discoveriesList.innerHTML = '<p style="color: #ff4444;">⚠️ Start PostgreSQL to store discoveries: <code style="background: rgba(255,68,68,0.1); padding: 0.25rem 0.5rem; border-radius: 4px;">docker-compose up -d</code></p>';
+          } else {
+            discoveriesList.innerHTML = '<p style="color: #666;">No recent discoveries. Discovery runs automatically on startup.</p>';
+          }
+        }
+        
+        // Display database status
+        const dbStatusMsg = document.getElementById('db-status-message');
+        if (dbStatusMsg) {
+          if (!data.database_available) {
+            dbStatusMsg.style.display = 'block';
+          } else {
+            dbStatusMsg.style.display = 'none';
+          }
+        }
+      } catch (error) {
+        console.error('Error loading stats:', error);
+        document.getElementById('stats-display').innerHTML = '<p style="color: #ff4444;">Error loading statistics. The system will discover vendors automatically on startup.</p>';
+      }
+    }
+    
+    // Load stats when page loads
+    loadHomepageStats();
+  </script>
+</body>
+</html>

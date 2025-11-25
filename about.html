@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About – Dark-AI</title>
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px; /* Account for fixed navigation */
+    }
+    
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: #05060b url('https://i.imgur.com/YTCnPOE.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #f2f3f5;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5, 6, 11, 0.75);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    
+    nav .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #f97373, #dc2626 48%, #111827 100%);
+      box-shadow: 0 0 22px rgba(248,113,113,0.8), 0 0 60px rgba(127,29,29,0.8);
+      position: relative;
+      flex-shrink: 0;
+    }
+    nav a {
+      text-decoration: none;
+      margin-left: 1.8rem;
+      color: #d4d7dd;
+      font-size: 0.95rem;
+    }
+    nav a:hover {
+      color: #ff6b6b;
+    }
+
+    header.hero {
+      padding: 5rem 2rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    header.hero h1 {
+      font-size: 3.5rem;
+      max-width: 900px;
+      line-height: 1.15;
+      margin: 0 auto 1.5rem;
+      font-weight: 700;
+    }
+    header.hero p {
+      max-width: 700px;
+      color: #9aa0a6;
+      font-size: 1.2rem;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    section.about-content {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .about-main {
+      display: block;
+      margin-bottom: 4rem;
+    }
+    
+    .about-text {
+      padding-right: 2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .about-text::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #ff6b6b, transparent);
+      border-radius: 2px;
+    }
+    
+    .about-text h2 {
+      font-size: 2.5rem;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      color: #ff6b6b;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    
+    .about-text p {
+      color: #b4bac3;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .about-text p:last-of-type {
+      margin-bottom: 0;
+    }
+    
+    /* Visual separator between paragraphs */
+    .about-text p:not(:last-of-type)::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, #ff6b6b, transparent);
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .about-text .highlight {
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+    
+    .about-image {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      background: #0b0d16;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 30px rgba(0,0,0,0.45);
+      object-fit: cover;
+    }
+    
+    .about-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 2rem; /* Extra padding for scroll anchor */
+      align-items: start;
+    }
+    
+    #contact {
+      scroll-margin-top: 100px; /* Ensure contact section isn't cut off */
+    }
+    
+    .about-bottom > div:first-child {
+      display: flex;
+      align-items: stretch;
+    }
+    
+    .about-bottom .about-image {
+      width: 100%;
+      height: auto;
+      min-height: 500px;
+      max-height: 600px;
+      object-fit: cover;
+    }
+    
+    @media (max-width: 968px) {
+      .about-bottom {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-bottom .about-image {
+        min-height: 400px;
+        max-height: none;
+      }
+    }
+    
+    .about-mission-box {
+      background: linear-gradient(135deg, #0b0d16 0%, #1a1d2a 100%);
+      padding: 2.5rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 107, 107, 0.2);
+      box-shadow: 0 0 30px rgba(0,0,0,0.45), 0 0 60px rgba(255, 107, 107, 0.1);
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-mission-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #ff4444, transparent);
+    }
+    
+    .about-mission-box p {
+      color: #d4d7dd;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: 400;
+    }
+    
+    .mission-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+    
+    
+    .contact-form-container {
+      background: #0b0d16;
+      padding: 2.5rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 30px rgba(0,0,0,0.45);
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contact-form-container h3 {
+      font-size: 1.8rem;
+      margin: 0 0 1.5rem;
+      color: #fff;
+    }
+    
+    .contact-form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      margin-bottom: 0;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #d4d7dd;
+      font-size: 0.95rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #161923;
+      color: #eee;
+      font-size: 0.95rem;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #ff6b6b;
+      background: #1a1d2a;
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .btn-submit {
+      padding: 0.9rem 2rem;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff6b6b, #c43434);
+      border: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 0 2rem rgba(255, 80, 80, 0.45);
+    }
+    
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 2.5rem rgba(255, 80, 80, 0.6);
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      color: #777c85;
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    @media (max-width: 968px) {
+      .about-main,
+      .about-bottom {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .about-text {
+        padding-right: 0;
+      }
+      
+      header.hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="DarkAi.html" class="logo" style="text-decoration: none; color: inherit;">
+    <span class="logo-mark"></span>
+    Dark-AI
+  </a>
+  <div>
+    <a href="about.html">About</a>
+    <a href="http://shadowstack.onrender.com/" target="_blank">ShadowStack</a>
+    <a href="https://blackwireintel.onrender.com/" target="_blank">BlackWire</a>
+    <a href="https://personaforge.onrender.com/" target="_blank">PersonaForge</a>
+    <a href="about.html#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>About</h1>
+  <p>Building tools to expose AI-driven harms and protect people from synthetic identity fraud, deepfake exploitation, and cyber-enabled extortion.</p>
+</header>
+
+<section class="about-content">
+  <div class="about-main">
+    <div class="about-text">
+      <h2>Why</h2>
+      <p>As a <span class="highlight">Senior Product Manager with an AI specialty</span>, I've witnessed firsthand how rapidly AI technologies are being weaponized to harm individuals. The scale of synthetic identity fraud, deepfake exploitation, and AI-enabled extortion is accelerating at an unprecedented rate, and existing tools are insufficient to map and expose these networks.</p>
+
+      <p>I care deeply about <span class="highlight">protecting people</span> from these emerging threats. Every synthetic identity used for fraud, every deepfake created without consent, and every AI-powered extortion attempt represents a real person whose life can be shattered. These aren't abstract technical problems—they're human problems that demand urgent, practical solutions.</p>
+
+      <p style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255, 107, 107, 0.2);">
+        If you want to help, have ideas, or want to collaborate, please <a href="#contact" style="color: #ff6b6b; text-decoration: underline;">reach out</a> or connect with me on <a href="http://linkedin.com/in/aazir-munir" target="_blank" style="color: #ff6b6b; text-decoration: underline;">LinkedIn</a>.
+      </p>
+
+    </div>
+  </div>
+
+  <div class="about-bottom">
+    <div>
+      <img src="https://media.licdn.com/dms/image/v2/D5603AQFyJn6wTMoe2Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1702930175808?e=1765411200&v=beta&t=dY6DzgcBXnKTSLKEC1pdlQG0YhmmNNVsjiqCPiOn6Vo" alt="Profile" class="about-image">
+    </div>
+
+    <div class="contact-form-container" id="contact">
+      <h3>Contact</h3>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Handle form submission
+  document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    // Create mailto link
+    const subject = encodeURIComponent('Contact from Dark-AI About Page');
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    const mailtoLink = `mailto:aazirmun@gmail.com?subject=${subject}&body=${body}`;
+    
+    window.location.href = mailtoLink;
+  });
+</script>
+
+</body>
+</html>
+

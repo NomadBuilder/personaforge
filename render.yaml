@@ -1,0 +1,57 @@
+services:
+  - type: web
+    name: personaforge
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --threads 2 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FLASK_ENV
+        value: production
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: personaforge-postgres
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: personaforge-postgres
+          property: port
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: personaforge-postgres
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: personaforge-postgres
+          property: password
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: personaforge-postgres
+          property: database
+      # Neo4j is optional - app works with PostgreSQL only, but graph features need Neo4j
+      # Uncomment and set manually if you want to use Neo4j:
+      # - key: NEO4J_URI
+      #   sync: false
+      # - key: NEO4J_USER
+      #   sync: false
+      # - key: NEO4J_PASSWORD
+      #   sync: false
+      # Optional API Keys - set these manually in Render dashboard
+      - key: BUILTWITH_API_KEY
+        sync: false
+      - key: IPLOCATE_API_KEY
+        sync: false
+      - key: SHODAN_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+
+databases:
+  - name: personaforge-postgres
+    databaseName: personaforge
+    user: personaforge_user
+    plan: free
+

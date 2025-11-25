@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard – PersonaForge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="/" class="nav__brand">
+        <span class="nav__brand-mark"></span>
+        PERSONAFORGE
+      </a>
+      <div class="nav__links">
+        <a href="/" class="nav__link">Home</a>
+        <a href="/dashboard" class="nav__link nav__link--accent">Dashboard</a>
+        <a href="/vendors" class="nav__link">Vendors</a>
+        <a href="/methodology" class="nav__link">Methodology</a>
+      </div>
+    </nav>
+
+    <!-- Main container -->
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h2>Infrastructure Graph</h2>
+        <div class="stats" id="stats">
+          <div class="stat-item">
+            <span class="stat-label">Domains</span>
+            <span class="stat-value" id="domain-count">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Vendors</span>
+            <span class="stat-value" id="vendor-count">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Clusters</span>
+            <span class="stat-value" id="cluster-count">0</span>
+          </div>
+        </div>
+
+        <div class="controls-section">
+          <h3>Controls</h3>
+          <button id="refresh-btn" class="btn btn-primary">Refresh Data</button>
+          <button id="reset-zoom-btn" class="btn btn-secondary" style="display: none;">Reset Zoom</button>
+          <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
+            <a href="/api/export/domains?format=csv" class="btn btn-secondary" style="text-decoration: none; text-align: center;">Export Domains (CSV)</a>
+            <a href="/api/export/graph?format=graphml" class="btn btn-secondary" style="text-decoration: none; text-align: center;">Export Graph (GraphML)</a>
+          </div>
+        </div>
+
+        <div class="bulk-upload-section" style="margin-top: 1.5rem;">
+          <h3>Bulk Upload</h3>
+          <input type="file" id="csv-upload" accept=".csv" style="display: none;">
+          <button id="upload-btn" class="btn btn-secondary" style="width: 100%;">Upload CSV</button>
+          <div id="upload-status" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted); display: none;"></div>
+        </div>
+
+        <div class="filters-section">
+          <h3>Filters</h3>
+          <div class="filter-group">
+            <label class="filter-checkbox">
+              <input type="checkbox" id="filter-domains" checked>
+              <span>Domains</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" id="filter-vendors" checked>
+              <span>Vendors</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" id="filter-hosts" checked>
+              <span>Hosts</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" id="filter-cdns" checked>
+              <span>CDNs</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" id="filter-payment" checked>
+              <span>Payment Processors</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <h3>Node Types</h3>
+          <div class="legend-item">
+            <span class="legend-color" style="background: #ff6b6b;"></span>
+            <span>Domain</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: #4ecdc4;"></span>
+            <span>Vendor</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: #95e1d3;"></span>
+            <span>Host</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: #f38181;"></span>
+            <span>CDN</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: #aa96da;"></span>
+            <span>Payment</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main graph area -->
+      <div class="graph-area">
+        <div class="graph-header">
+          <h2>Vendor Infrastructure Network</h2>
+          <div class="search-box">
+            <input type="text" id="graph-search" placeholder="🔍 Search domains, vendors, hosts..." class="search-input">
+          </div>
+        </div>
+        <div class="graph-container">
+          <svg id="graph-svg"></svg>
+          <div id="tooltip" class="tooltip" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Node Detail Modal -->
+  <div id="node-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <!-- Content will be dynamically inserted by JavaScript -->
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/visualization.js') }}"></script>
+</body>
+</html>
+

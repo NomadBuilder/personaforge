@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dark-AI.ca – Exposing Hidden AI Harms</title>
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: #05060b url('https://i.imgur.com/YTCnPOE.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #f2f3f5;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5, 6, 11, 0.75);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    
+    nav .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #f97373, #dc2626 48%, #111827 100%);
+      box-shadow: 0 0 22px rgba(248,113,113,0.8), 0 0 60px rgba(127,29,29,0.8);
+      position: relative;
+      flex-shrink: 0;
+    }
+    nav a {
+      text-decoration: none;
+      margin-left: 1.8rem;
+      color: #d4d7dd;
+      font-size: 0.95rem;
+    }
+    nav a:hover {
+      color: #ff6b6b;
+    }
+
+    header.hero {
+      padding: 5rem 2rem 7rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header.hero h1 {
+      font-size: 3rem;
+      max-width: 800px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    header.hero p {
+      max-width: 650px;
+      color: #9aa0a6;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      background: linear-gradient(135deg, #ff6b6b, #c43434);
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 0 2rem rgba(255, 80, 80, 0.45);
+    }
+
+    section.about {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-text {
+      max-width: 800px;
+    }
+    .about-text h2 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+    .about-text p {
+      color: #b4bac3;
+      line-height: 1.55;
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+    
+
+    section.spoken {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .spoken h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.4rem;
+    }
+    .spoken-logos img {
+      height: 45px;
+      margin-right: 1.6rem;
+      opacity: 0.8;
+    }
+
+    section.contact {
+      padding: 4rem 2rem 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start;
+    }
+    .contact-img {
+      flex: 1;
+      height: 250px;
+      background: #0e111a;
+      border-radius: 16px;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .contact-form {
+      flex: 1.4;
+      background: #0b0d16;
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .contact-form h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+    .input {
+      width: 100%;
+      margin-bottom: 1.2rem;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: none;
+      background: #161923;
+      color: #eee;
+      font-size: 0.95rem;
+    }
+    .contact-form button {
+      padding: 0.75rem 1.6rem;
+      border-radius: 10px;
+      background: #ff6b6b;
+      border: none;
+      color: white;
+      font-size: 1rem;
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      color: #777c85;
+      font-size: 0.85rem;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="DarkAi.html" class="logo" style="text-decoration: none; color: inherit;">
+    <span class="logo-mark"></span>
+    Dark-AI
+  </a>
+  <div>
+    <a href="about.html">About</a>
+    <a href="http://shadowstack.onrender.com/" target="_blank">ShadowStack</a>
+    <a href="https://blackwireintel.onrender.com/" target="_blank">BlackWire</a>
+    <a href="https://personaforge.onrender.com/" target="_blank">PersonaForge</a>
+    <a href="about.html#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>Exposing AI-powered harms hidden beneath the surface of the internet.</h1>
+  <p>Dark-AI develops investigative tools that map synthetic identities, exploitative AI imagery, and cyber-enabled extortion networks — helping journalists, researchers, and platforms uncover what AI is making possible.</p>
+  <a href="http://shadowstack.onrender.com/" class="btn-primary" target="_blank">Explore the tools</a>
+</header>
+
+<section class="about" id="about">
+  <div class="about-text">
+    <h2>Why Dark-AI Exists</h2>
+    <p>AI systems are accelerating forms of online exploitation — from synthetic identities to deepfake extortion to AI-generated sexual abuse. These harms operate through hidden infrastructures: vendors, APIs, hosting providers, messaging networks, and marketplaces that supply the tools.</p>
+
+    <p>Dark-AI builds publicly accessible intelligence tools that uncover these networks so that policymakers, platforms, reporters, and everyday people can understand the threat landscape before it grows even further.</p>
+  </div>
+</section>
+
+
+<!-- AI Harms / Stats Section -->
+<section class="ai-harms" style="padding:4rem 2rem; max-width:1200px; margin:0 auto;">
+  <h2 style="font-size:2rem; margin-bottom:1rem;">AI Harms: What the Data Shows</h2>
+  <p style="color:#9aa0a6; max-width:800px; margin-bottom:2rem;">Verified statistics showing the scale and acceleration of AI‑enabled harms — from synthetic identities to deepfake exploitation.</p>
+
+  <div style="display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:space-between;">
+
+    <div style="flex:1 1 calc(33% - 1rem); background:#0b0d16; padding:1.8rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08); min-width:260px;">
+      <h3 style="margin:0 0 .5rem;">💳 $20B+ in Synthetic ID Fraud</h3>
+      <p style="color:#b4bac3; line-height:1.55;">Synthetic identity fraud is the fastest-growing financial crime in North America.<br><em>Source: U.S. Federal Reserve</em></p>
+    </div>
+
+    <div style="flex:1 1 calc(33% - 1rem); background:#0b0d16; padding:1.8rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08); min-width:260px;">
+      <h3 style="margin:0 0 .5rem;">🎭 500k+ Deepfake Scams Annually</h3>
+      <p style="color:#b4bac3; line-height:1.55;">Deepfake impersonation scam reports have surged 400% since 2022.<br><em>Source: Europol / FTC</em></p>
+    </div>
+
+    <div style="flex:1 1 calc(33% - 1rem); background:#0b0d16; padding:1.8rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08); min-width:260px;">
+      <h3 style="margin:0 0 .5rem; color:#ff6b6b; font-size:2rem;">+550%</h3>
+      <p style="color:#fff; font-weight:600; margin-top:-.5rem;">Growth</p>
+      <p style="color:#b4bac3; line-height:1.55;">A 2025 policy brief shows a 550% increase in explicit AI deepfake videos since 2019, reaching 96,000+ videos recorded in 2023 alone.</p>
+    </div>
+
+    <div style="flex:1 1 calc(33% - 1rem); background:#0b0d16; padding:1.8rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08); min-width:260px;">
+      <h3 style="margin:0 0 .5rem; color:#ff6b6b; font-size:2rem;">6%</h3>
+      <p style="color:#fff; font-weight:600; margin-top:-.5rem;">of youth</p>
+      <p style="color:#b4bac3; line-height:1.55;">Research shows that 1 in 17 (≈6%) of young people have had deepfake nudes created of them — an unprecedented level of AI-driven harm.</p>
+    </div>
+
+    <div style="flex:1 1 calc(33% - 1rem); background:#0b0d16; padding:1.8rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08); min-width:260px;">
+      <h3 style="margin:0 0 .5rem;">🕵️‍♂️ 3.8M Impersonation Attempts</h3>
+      <p style="color:#b4bac3; line-height:1.55;">Security firms estimate nearly 4 million AI-assisted impersonation attempts occurred globally in 2024.<br><em>Source: Trend Micro / ENISA</em></p>
+    </div>
+
+    <div style="flex:1 1 calc(33% - 1rem); background:#0b0d16; padding:1.8rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08); min-width:260px;">
+      <h3 style="margin:0 0 .5rem;">💰 $1.3B Lost to AI‑Enhanced Fraud</h3>
+      <p style="color:#b4bac3; line-height:1.55;">Financial fraud augmented by AI tools cost victims over $1.3B in 2023 alone.<br><em>Source: FBI IC3</em></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Three Tool Section -->
+<section class="tools" style="padding:4rem 2rem; max-width:1200px; margin:0 auto;">
+  <h2 style="font-size:2rem; margin-bottom:1rem;">Investigative Tools</h2>
+  <p style="color:#9aa0a6; max-width:800px; margin-bottom:2rem;">Explore the products in the Dark‑AI suite — each built to reveal hidden AI‑driven harms across the internet.</p>
+
+  <div style="display:flex; flex-wrap:wrap; gap:2rem;">
+
+    <!-- ShadowStack -->
+    <div style="flex:1; min-width:300px; background:#0b0d16; padding:2rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08);">
+      <h3 style="margin:0 0 .5rem; font-size:1.4rem;">ShadowStack</h3>
+      <p style="color:#b4bac3; line-height:1.55; margin-bottom:1.2rem;">Maps the hosting infrastructure, CDNs, payment processors, and advertising networks enabling the spread of AI‑generated sexual exploitation.</p>
+      <a href="http://shadowstack.onrender.com/" class="btn-primary" style="padding:.6rem 1.2rem; font-size:.9rem;" target="_blank">Open ShadowStack</a>
+    </div>
+
+    <!-- BlackWire -->
+    <div style="flex:1; min-width:300px; background:#0b0d16; padding:2rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08);">
+      <h3 style="margin:0 0 .5rem; font-size:1.4rem;">BlackWire</h3>
+      <p style="color:#b4bac3; line-height:1.55; margin-bottom:1.2rem;">Tracks VOIP numbers, fraud domains, messaging handles, and crypto wallets used in AI‑scaled sextortion attempts — exposing attacker networks.</p>
+      <a href="https://blackwireintel.onrender.com/" class="btn-primary" style="padding:.6rem 1.2rem; font-size:.9rem;" target="_blank">Open BlackWire</a>
+    </div>
+
+    <!-- PersonaForge -->
+    <div style="flex:1; min-width:300px; background:#0b0d16; padding:2rem; border-radius:14px; border:1px solid rgba(255,255,255,0.08);">
+      <h3 style="margin:0 0 .5rem; font-size:1.4rem;">PersonaForge</h3>
+      <p style="color:#b4bac3; line-height:1.55; margin-bottom:1.2rem;">Identifies vendors, marketplaces, and bot‑driven distribution networks selling synthetic identities and deepfake impersonation kits.</p>
+      <a href="https://personaforge.onrender.com/" class="btn-primary" style="padding:.6rem 1.2rem; font-size:.9rem;" target="_blank">Open PersonaForge</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-final" style="padding:4rem 2rem; text-align:center; max-width:900px; margin:0 auto;">
+  <h2 style="font-size:2rem; margin-bottom:1rem;">Ready to Investigate AI-Driven Harm?</h2>
+  <p style="color:#9aa0a6; margin-bottom:2rem; font-size:1.1rem;">Explore detailed dashboards, infrastructure maps, and live intelligence across all Dark‑AI tools.</p>
+  <a href="http://shadowstack.onrender.com/" class="btn-primary" style="padding:1rem 2rem; font-size:1.1rem;" target="_blank">Start Investigating</a>
+</section>
+
+</body>
+</html>

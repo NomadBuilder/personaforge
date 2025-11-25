@@ -1,0 +1,40 @@
+# Core dependencies
+python-whois==0.8.0
+dnspython==2.4.2
+requests==2.31.0
+beautifulsoup4==4.12.2
+lxml==4.9.3
+playwright==1.40.0
+selenium==4.15.2
+psycopg2-binary==2.9.9
+python-dotenv==1.0.0
+python-dateutil==2.8.2
+
+# Web framework
+flask==3.0.0
+flask-cors==4.0.0
+gunicorn==21.2.0
+
+# Neo4j (for graph visualization - optional but recommended)
+neo4j==5.15.0
+
+# Tech stack detection
+python-wappalyzer==0.3.1
+setuptools>=80.0.0
+
+# AI/ML (optional, for clustering and analysis)
+openai>=1.0.0
+
+# Search API (recommended - more reliable than scraping)
+google-search-results==2.4.2  # SerpAPI client
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Dark Web Access (OPTIONAL - Use with caution)
+# Uncomment if you want to enable dark web access:
+# stem==1.8.1  # Tor controller
+# requests[socks]==2.31.0  # SOCKS proxy support (already included)
+# PySocks==1.7.1  # SOCKS proxy
+
