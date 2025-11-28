@@ -1387,22 +1387,39 @@ def run_initial_discovery():
 
 
 if __name__ == '__main__':
-    # ⚠️ DUMMY DATA SEEDING - FOR VISUALIZATION TESTING ONLY ⚠️
-    # Uncomment the line below to seed dummy data for testing visualizations
-    # WARNING: This adds FAKE data. Remove with: DELETE FROM domains WHERE source = 'DUMMY_DATA_FOR_TESTING';
-    # from src.database.seed_dummy_data import seed_dummy_data
-    # seed_dummy_data(num_domains=50)  # ⚠️ DUMMY DATA - REMOVE BEFORE PRODUCTION
-    # Run initial discovery in background if database is empty
+    # Auto-seed dummy data for PersonaForge ONCE if no dummy data exists
+    # This ensures the visualization always has data to display
     import threading
     import time
-    def delayed_discovery():
+    def delayed_setup():
         time.sleep(3)  # Wait for app to fully start
+        try:
+            if postgres_client and postgres_client.conn:
+                # Check specifically for dummy data (not all domains)
+                # Note: Standalone PersonaForge uses 'domains' table (not prefixed)
+                cursor = postgres_client.conn.cursor()
+                cursor.execute("SELECT COUNT(*) FROM domains WHERE source = 'DUMMY_DATA_FOR_TESTING'")
+                dummy_count = cursor.fetchone()[0]
+                cursor.close()
+                
+                if dummy_count == 0:
+                    app_logger.info("📊 No dummy data found - seeding dummy data for PersonaForge visualization (one-time only)...")
+                    from src.database.seed_dummy_data import seed_dummy_data
+                    count = seed_dummy_data(num_domains=50)
+                    app_logger.info(f"✅ Seeded {count} dummy domains for PersonaForge visualization")
+                else:
+                    app_logger.info(f"✅ Dummy data already exists ({dummy_count} domains) - skipping seed")
+        except Exception as e:
+            app_logger.error(f"Error checking/seeding dummy data: {e}", exc_info=True)
+        
+        # Run initial discovery in background if database has real data
         run_initial_discovery()
     
-    discovery_thread = threading.Thread(target=delayed_discovery, daemon=True)
-    discovery_thread.start()
+    setup_thread = threading.Thread(target=delayed_setup, daemon=True)
+    setup_thread.start()
     
     port = int(os.getenv('PORT', os.getenv('FLASK_PORT', 5000)))
     debug = Config.FLASK_DEBUG
+    app_logger.info(f"🚀 PersonaForge starting on port {port}")
     app.run(host='0.0.0.0', port=port, debug=debug)
 

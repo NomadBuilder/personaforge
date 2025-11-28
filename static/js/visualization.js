@@ -148,32 +148,34 @@ function renderGraph() {
     return;
   }
 
-  // Create force simulation with better clustering
+  // Create force simulation with increased spacing
   simulation = d3.forceSimulation(graphData.nodes)
     .force('link', d3.forceLink(graphData.edges).id(d => d.id)
       .distance(d => {
-        // Shorter distance for cluster relationships
-        if (d.type === 'IN_CLUSTER') return 50;
-        if (d.type === 'OWNED_BY') return 80;
-        return 120;
+        // Increased distances for better spacing
+        if (d.type === 'IN_CLUSTER') return 150;
+        if (d.type === 'OWNED_BY') return 200;
+        return 250;
       })
-      .strength(0.5))
+      .strength(0.3))
     .force('charge', d3.forceManyBody().strength(d => {
-      // Stronger repulsion for clusters and vendors (centers)
-      if (d.label === 'Cluster' || d.label === 'Vendor') return -800;
-      if (d.label === 'Host' || d.label === 'CDN' || d.label === 'PaymentProcessor') return -400;
-      return -200; // Domains have less repulsion
+      // Increased repulsion to spread nodes out more
+      if (d.label === 'Cluster' || d.label === 'Vendor') return -2000;
+      if (d.label === 'Host' || d.label === 'CDN' || d.label === 'PaymentProcessor') return -1000;
+      return -600; // More repulsion for domains
     }))
     .force('center', d3.forceCenter(width / 2, height / 2))
     .force('collision', d3.forceCollide().radius(d => {
-      // Larger collision radius for important nodes
-      if (d.label === 'Cluster') return 60;
-      if (d.label === 'Vendor') return 40;
-      if (d.label === 'Host' || d.label === 'CDN' || d.label === 'PaymentProcessor') return 25;
-      return 15;
+      // Much larger collision radius for better spacing
+      if (d.label === 'Cluster') return 100;
+      if (d.label === 'Vendor') return 70;
+      if (d.label === 'Host' || d.label === 'CDN' || d.label === 'PaymentProcessor') return 50;
+      return 35; // More space for domains
     }))
-    .force('x', d3.forceX(width / 2).strength(0.05))
-    .force('y', d3.forceY(height / 2).strength(0.05));
+    .force('x', d3.forceX(width / 2).strength(0.03))
+    .force('y', d3.forceY(height / 2).strength(0.03))
+    .alphaDecay(0.01)  // Slower decay for better layout
+    .velocityDecay(0.4);  // More damping
 
   // Draw edges (store reference for filtering)
   graphEdges = g.append('g')
@@ -208,10 +210,11 @@ function renderGraph() {
     .enter()
     .append('text')
     .text(d => getNodeLabel(d))
-    .attr('font-size', '10px')
-    .attr('fill', '#9aa0a6')
+    .attr('font-size', '11px')  // Slightly larger for better readability
+    .attr('fill', '#e2e8f0')  // Lighter color for better contrast
     .attr('text-anchor', 'middle')
-    .attr('dy', d => getNodeRadius(d) + 12);
+    .attr('dy', d => getNodeRadius(d) + 18)  // More space below node
+    .style('text-shadow', '0 1px 2px rgba(0,0,0,0.8)');  // Add shadow for readability
 
   // Apply initial filters
   applyFilters();
